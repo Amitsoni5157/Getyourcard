@@ -123,6 +123,28 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &482008215 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1893027113, guid: a81929905c33aa04f9aba52d501bb700, type: 3}
+  m_PrefabInstance: {fileID: 1484350938388214708}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &561548050 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1484350938655718883, guid: a81929905c33aa04f9aba52d501bb700, type: 3}
+  m_PrefabInstance: {fileID: 1484350938388214708}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &749169913
 GameObject:
   m_ObjectHideFlags: 0
@@ -356,6 +378,56 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1484350938212555319, guid: a81929905c33aa04f9aba52d501bb700, type: 3}
   m_PrefabInstance: {fileID: 1484350938388214708}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1193486858
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1193486860}
+  - component: {fileID: 1193486859}
+  m_Layer: 0
+  m_Name: ScoreManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1193486859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1193486858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 338fd570f57cc5549bb8eb699a4b10fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentScore: 0
+  playTime: 0
+  TimeText: {fileID: 1955716826}
+  ScoreText: {fileID: 561548050}
+  ComboText: {fileID: 0}
+  TurnText: {fileID: 482008215}
+--- !u!4 &1193486860
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1193486858}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1496227104
 GameObject:
   m_ObjectHideFlags: 0
@@ -439,7 +511,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1496227107}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1193486859}
+        m_TargetAssemblyTypeName: ScoreManager, Assembly-CSharp
+        m_MethodName: RestartLevel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1496227107
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -582,6 +666,17 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1955716826 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1484350937390155632, guid: a81929905c33aa04f9aba52d501bb700, type: 3}
+  m_PrefabInstance: {fileID: 1484350938388214708}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1957071217
 GameObject:
   m_ObjectHideFlags: 0
@@ -726,11 +821,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1893027113, guid: a81929905c33aa04f9aba52d501bb700, type: 3}
       propertyPath: m_text
-      value: 'Turns: 20'
+      value: 'Turns: 00'
       objectReference: {fileID: 0}
     - target: {fileID: 1484350937390155632, guid: a81929905c33aa04f9aba52d501bb700, type: 3}
       propertyPath: m_text
-      value: 'Time: 2:00'
+      value: 'Time: 00:00'
       objectReference: {fileID: 0}
     - target: {fileID: 1484350938212555318, guid: a81929905c33aa04f9aba52d501bb700, type: 3}
       propertyPath: m_Name
@@ -841,6 +936,10 @@ PrefabInstance:
       propertyPath: spacer
       value: 
       objectReference: {fileID: 8463271180598698256}
+    - target: {fileID: 2478276009040857752, guid: d34eebf12382efb4590b0abb972c1672, type: 3}
+      propertyPath: matchScore
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6277949337069794358, guid: d34eebf12382efb4590b0abb972c1672, type: 3}
       propertyPath: m_Name
       value: CardManager

@@ -28,7 +28,7 @@ public class CardManager : MonoBehaviour
     public Transform spacer;
 
     [Header("Basic score per Match")]
-    public int matchScore = 100;
+    public int matchScore = 10;
 
 
 
@@ -105,6 +105,7 @@ public class CardManager : MonoBehaviour
             FlipAllBack();
 
             //Reset the combo in Score Manger
+            ScoreManager.Instance.UpdateCurrentTurn();
         }
         else if((Choice1 != 0 && Choice2 != 0) && (Choice1 == Choice2))
         {
@@ -112,7 +113,7 @@ public class CardManager : MonoBehaviour
 
             lastMatchId = Choice1;
             //Add score
-
+            ScoreManager.Instance.AddScore(matchScore);
             //Remove the Match
 
             //Clear ChoosenCards
@@ -155,6 +156,7 @@ public class CardManager : MonoBehaviour
     void CheckWin()
     {
         //Stop Timer
+        ScoreManager.Instance.StopTime();
 
         //Show UI
 
