@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6277949337069794358
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7486661002560211108}
+  - component: {fileID: 2478276009040857752}
+  m_Layer: 0
+  m_Name: CardManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7486661002560211108
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6277949337069794358}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 90}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2478276009040857752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6277949337069794358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ace358e5c4e3014dbffceffd3812c54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpriteList:
+  - {fileID: -1684040594, guid: da49619ef37f54f4eba65ec23f4b0096, type: 3}
+  - {fileID: 1876535730, guid: da49619ef37f54f4eba65ec23f4b0096, type: 3}
+  - {fileID: -740920633, guid: da49619ef37f54f4eba65ec23f4b0096, type: 3}
+  - {fileID: 1395130941, guid: da49619ef37f54f4eba65ec23f4b0096, type: 3}
+  - {fileID: -922505410, guid: da49619ef37f54f4eba65ec23f4b0096, type: 3}
+  - {fileID: 1382390136, guid: da49619ef37f54f4eba65ec23f4b0096, type: 3}
+  - {fileID: 2045508480, guid: da49619ef37f54f4eba65ec23f4b0096, type: 3}
+  - {fileID: 1199124897, guid: da49619ef37f54f4eba65ec23f4b0096, type: 3}
+  - {fileID: -1351663588, guid: da49619ef37f54f4eba65ec23f4b0096, type: 3}
+  - {fileID: 1493857242, guid: da49619ef37f54f4eba65ec23f4b0096, type: 3}
+  - {fileID: 1446961636, guid: da49619ef37f54f4eba65ec23f4b0096, type: 3}
+  - {fileID: -1416188578, guid: da49619ef37f54f4eba65ec23f4b0096, type: 3}
+  - {fileID: -1981833308, guid: da49619ef37f54f4eba65ec23f4b0096, type: 3}
+  - {fileID: -110160920, guid: da49619ef37f54f4eba65ec23f4b0096, type: 3}
+  - {fileID: 207158398, guid: da49619ef37f54f4eba65ec23f4b0096, type: 3}
+  buttonList: []
+  hiddenButtonList: []
+  is_Choosen: 0
+  Pairs: 2
+  CardPrefab: {fileID: 5397736663445695464, guid: 1180384d99ea7104fa500015c429fbf1, type: 3}
+  spacer: {fileID: 0}
+  matchScore: 100
+  Choice1: 0
+  Choice2: 0
