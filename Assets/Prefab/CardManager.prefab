@@ -63,9 +63,10 @@ MonoBehaviour:
   buttonList: []
   hiddenButtonList: []
   is_Choosen: 0
-  Pairs: 2
+  Pairs: 4
   CardPrefab: {fileID: 5397736663445695464, guid: 1180384d99ea7104fa500015c429fbf1, type: 3}
   spacer: {fileID: 0}
-  matchScore: 100
+  matchScore: 10
   Choice1: 0
   Choice2: 0
+  fxExplosion: {fileID: 7575684615645921461, guid: 3064337c5ebd3a84bac9ab8627a34d11, type: 3}

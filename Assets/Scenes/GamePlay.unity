@@ -640,7 +640,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_TargetDisplay: 0
 --- !u!224 &1727940352
 RectTransform:
@@ -929,17 +929,9 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2478276009040857752, guid: d34eebf12382efb4590b0abb972c1672, type: 3}
-      propertyPath: Pairs
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 2478276009040857752, guid: d34eebf12382efb4590b0abb972c1672, type: 3}
       propertyPath: spacer
       value: 
       objectReference: {fileID: 8463271180598698256}
-    - target: {fileID: 2478276009040857752, guid: d34eebf12382efb4590b0abb972c1672, type: 3}
-      propertyPath: matchScore
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 6277949337069794358, guid: d34eebf12382efb4590b0abb972c1672, type: 3}
       propertyPath: m_Name
       value: CardManager

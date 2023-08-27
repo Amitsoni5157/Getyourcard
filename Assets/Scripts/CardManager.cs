@@ -35,6 +35,9 @@ public class CardManager : MonoBehaviour
     public int Choice1;
     public int Choice2;
 
+    [Header("Effect")]
+    public GameObject fxExplosion;
+
 
     private void Awake()
     {
@@ -115,7 +118,7 @@ public class CardManager : MonoBehaviour
             //Add score
             ScoreManager.Instance.AddScore(matchScore);
             //Remove the Match
-
+            RemoveMatch();
             //Clear ChoosenCards
             choosenCard.Clear();
         }
@@ -139,13 +142,17 @@ public class CardManager : MonoBehaviour
 
     void RemoveMatch()
     {
-        for (int i = hiddenButtonList.Count - 1 ; i  >= 0; i++)
+        for (int i = hiddenButtonList.Count - 1 ; i  >= 0; i--)
         {
             Card tempCard = hiddenButtonList[i].GetComponent<Card>();
             if(tempCard.id == lastMatchId)
             {
-                //Practicle FX
 
+                //Practicle FX
+                Instantiate(fxExplosion,hiddenButtonList[i].transform.position,Quaternion.identity);
+
+                //Remove the Match card
+                hiddenButtonList[i].GetComponent<UnityEngine.UI.Image>().enabled = false;
 
                 //Remove The Card
                 hiddenButtonList.RemoveAt(i);
