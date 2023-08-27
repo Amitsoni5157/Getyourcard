@@ -11,17 +11,17 @@ public class ScoreManager : MonoBehaviour
 
     public int currentScore;
 
-    private int currentComboAmount;
     private int currentTurn;
 
     public int playTime;
     private int seconds;
     private int minutes;
 
+    public Image YouWonPanel;
+
     [Header("Text connections")]
     public TextMeshProUGUI TimeText;
     public TextMeshProUGUI ScoreText;
-    public TextMeshProUGUI ComboText;
     public TextMeshProUGUI TurnText;
 
     private void Awake()
@@ -42,7 +42,6 @@ public class ScoreManager : MonoBehaviour
 
     public void AddScore(int scoreAmount)
     {
-        currentComboAmount++;
         currentTurn++;
         currentScore += scoreAmount;
         UpdateScoreText();
@@ -80,5 +79,10 @@ public class ScoreManager : MonoBehaviour
     public void StopTime()
     {
         StopCoroutine("PlayTime");
+    }
+
+    public void ToggleYouWon(bool value)
+    {
+        YouWonPanel.gameObject.SetActive(value);
     }
 }

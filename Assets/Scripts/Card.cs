@@ -29,26 +29,28 @@ public class Card : MonoBehaviour
 
     public void FlipCard()
     {
-        if(CardManager.instance.Choice1 == 0)
+        if(CardManager.Instance.Choice1 == 0)
         {
-            CardManager.instance.Choice1 = id;
-            CardManager.instance.AddChoosenCard(this.gameObject);
+            SoundManager.Instance.PlayCardFlipMusic();
+            CardManager.Instance.Choice1 = id;
+            CardManager.Instance.AddChoosenCard(this.gameObject);
 
             isFlippingOpen = true;
             StartCoroutine(FlipOpen());
 
             button.interactable = false;
-        }else if (CardManager.instance.Choice2 == 0)
+        }else if (CardManager.Instance.Choice2 == 0)
         {
-            CardManager.instance.Choice2 = id;
-            CardManager.instance.AddChoosenCard(this.gameObject);
+            SoundManager.Instance.PlayCardFlipMusic();
+            CardManager.Instance.Choice2 = id;
+            CardManager.Instance.AddChoosenCard(this.gameObject);
 
             isFlippingOpen = true;
             StartCoroutine(FlipOpen());
 
             button.interactable = false;
 
-            StartCoroutine(CardManager.instance.CompareCards());
+            StartCoroutine(CardManager.Instance.CompareCards());
 
         }
     }
@@ -85,6 +87,7 @@ public class Card : MonoBehaviour
     {
         while (isFlippingOpen && flipAmount > 0)
         {
+          
             flipAmount -= Time.deltaTime * flipSpeed;
             flipAmount = Mathf.Clamp01(flipAmount);
             transform.localScale = new Vector3(flipAmount, transform.localScale.y, transform.localScale.z);
@@ -98,6 +101,7 @@ public class Card : MonoBehaviour
         }
         while (isFlippingClose && flipAmount < 1)
         {
+           
             flipAmount += Time.deltaTime * flipSpeed;
             flipAmount = Mathf.Clamp01(flipAmount);
             transform.localScale = new Vector3(flipAmount, transform.localScale.y, transform.localScale.z);

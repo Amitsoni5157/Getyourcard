@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CardManager : MonoBehaviour
+public class CardManager : Singleton<CardManager>
 {
-
-    public static CardManager instance;
 
     public List<Sprite> SpriteList = new List<Sprite>();
 
@@ -25,12 +23,16 @@ public class CardManager : MonoBehaviour
     public GameObject CardPrefab;
 
     [Header("The Parent Spacer to sort Cards in")]
-    public Transform spacer;
+   
+    public Transform spacer2x2;
+    public Transform spacer2x3;
+    public Transform spacer5x6;
+
 
     [Header("Basic score per Match")]
     public int matchScore = 10;
 
-
+    GridLayout _grd;
 
     public int Choice1;
     public int Choice2;
@@ -39,32 +41,54 @@ public class CardManager : MonoBehaviour
     public GameObject fxExplosion;
 
 
-    private void Awake()
-    {
-        if (instance == null)
-        {
-            DontDestroyOnLoad(this);
-            instance = this;
-        }
-        else
-        {
-            Destroy(this);
-        }
-    }
+   
     // Start is called before the first frame update
     void Start()
     {
+        Pairs = int.Parse(Constant.CheckPairOfGame);
+        
+        Debug.Log(Pairs+"::pairs");
         FlipPlayFields();
     }
 
     void FlipPlayFields()
     {
-        for (int i = 0; i < (Pairs * 2); i++)
+        switch (Constant._pairEnum)
         {
-            GameObject newCard = Instantiate(CardPrefab, spacer);
-            buttonList.Add(newCard);
-            hiddenButtonList.Add(newCard);
+            case PairEnum.Two:
+                for (int i = 0; i < (Pairs * 2); i++)
+                {
+                    GameObject newCard = Instantiate(CardPrefab, spacer2x2);
+                    buttonList.Add(newCard);
+                    hiddenButtonList.Add(newCard);
+                }
+                break;
+            case PairEnum.Three:
+                for (int i = 0; i < (Pairs * 2); i++)
+                {
+                    GameObject newCard = Instantiate(CardPrefab, spacer2x3);
+                    buttonList.Add(newCard);
+                    hiddenButtonList.Add(newCard);
+                }
+                break;
+            case PairEnum.Five:
+                for (int i = 0; i < (Pairs * 2); i++)
+                {
+                    GameObject newCard = Instantiate(CardPrefab, spacer5x6);
+                    buttonList.Add(newCard);
+                    hiddenButtonList.Add(newCard);
+                }
+                break;
+            default:
+                for (int i = 0; i < (Pairs * 2); i++)
+                {
+                    GameObject newCard = Instantiate(CardPrefab, spacer2x2);
+                    buttonList.Add(newCard);
+                    hiddenButtonList.Add(newCard);
+                }
+                break;
         }
+       
         shuffleCard();
     }
 
@@ -100,7 +124,7 @@ public class CardManager : MonoBehaviour
             yield break;
         }
         is_Choosen = true;
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1f);
     
         if((Choice1 != 0 && Choice2 != 0) && (Choice1 != Choice2))
         {
@@ -113,7 +137,7 @@ public class CardManager : MonoBehaviour
         else if((Choice1 != 0 && Choice2 != 0) && (Choice1 == Choice2))
         {
             Debug.Log("Matched");
-
+            SoundManager.Instance.PlayCardMatchMusic();
             lastMatchId = Choice1;
             //Add score
             ScoreManager.Instance.AddScore(matchScore);
@@ -128,7 +152,7 @@ public class CardManager : MonoBehaviour
         is_Choosen = false;
 
         //Check if Won
-        CheckWin();
+        StartCoroutine("CheckWin");
     }
 
     void FlipAllBack()
@@ -160,19 +184,26 @@ public class CardManager : MonoBehaviour
         }
     }
 
-    void CheckWin()
+    IEnumerator CheckWin()
     {
-        //Stop Timer
-        ScoreManager.Instance.StopTime();
+        yield return new WaitForSeconds(2f);
+        if (hiddenButtonList.Count < 1)
+        {
+            //Stop Timer
+            ScoreManager.Instance.StopTime();
 
-        //Show UI
+            //Show UI
 
-        //Play FireWorks
+            //Play FireWorks
 
-        //Show Stars
+            //Show Stars
+            ScoreManager.Instance.ToggleYouWon(true);
+            Debug.Log("You Won");
+            StopCoroutine("CheckWin");
+        }
 
-        Debug.Log("You Won");
     }
+ 
 }
 
 
