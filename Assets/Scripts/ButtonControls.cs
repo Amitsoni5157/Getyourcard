@@ -5,11 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class ButtonControls : MonoBehaviour
 {
-  
     public void RestartGame()
     {
         SceneManager.LoadScene("MenuScene");
         ScoreManager.Instance.ToggleYouWon(false);
+       
+
     }
 
     public void TwoPair(int pair)

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CardManager : Singleton<CardManager>
 {
+   //public GameSaveData gameSaveData;
 
     public List<Sprite> SpriteList = new List<Sprite>();
 
@@ -45,6 +46,8 @@ public class CardManager : Singleton<CardManager>
     // Start is called before the first frame update
     void Start()
     {
+        //gameSaveData = PlayerPrefsExtra.GetObject<GameSaveData>("GameSaveData",gameSaveData);
+
         Pairs = int.Parse(Constant.CheckPairOfGame);
         
         Debug.Log(Pairs+"::pairs");
@@ -203,7 +206,23 @@ public class CardManager : Singleton<CardManager>
         }
 
     }
- 
+
+/*    public void SaveGameData()
+    {
+        gameSaveData.Score_temp = ScoreManager.Instance.currentScore;
+        gameSaveData.Time_temp = ScoreManager.Instance.playTime;
+        gameSaveData.Turn_temp = ScoreManager.Instance.CurrentTurn;
+        gameSaveData.hiddenButtonList_temp = hiddenButtonList;
+        gameSaveData.spacer_temp = spacer2x3;
+
+        PlayerPrefsExtra.SetObject("GameSaveData",gameSaveData);
+    }
+
+    public void SaveGame()
+    {
+        SaveGameData();
+    }*/
+
 }
 
 

@@ -24,6 +24,8 @@ public class ScoreManager : MonoBehaviour
     public TextMeshProUGUI ScoreText;
     public TextMeshProUGUI TurnText;
 
+    public int CurrentTurn { get => currentTurn; set => currentTurn = value; }
+
     private void Awake()
     {
         Instance = this;
@@ -42,21 +44,21 @@ public class ScoreManager : MonoBehaviour
 
     public void AddScore(int scoreAmount)
     {
-        currentTurn++;
+        CurrentTurn++;
         currentScore += scoreAmount;
         UpdateScoreText();
     }
 
     public void UpdateCurrentTurn()
     {
-        currentTurn++;
+        CurrentTurn++;
         UpdateScoreText();
     }
 
     void UpdateScoreText()
     {
         ScoreText.text = "Score: " + currentScore.ToString("N");
-        TurnText.text = "Turn: " + currentTurn;
+        TurnText.text = "Turn: " + CurrentTurn;
     }
 
     IEnumerator PlayTime()
