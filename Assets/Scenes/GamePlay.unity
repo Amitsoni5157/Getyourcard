@@ -1243,6 +1243,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentScore: 0
+  currentTurn: 0
   playTime: 0
   YouWonPanel: {fileID: 2017240727}
   TimeText: {fileID: 1955716826}
@@ -1409,6 +1410,7 @@ GameObject:
   - component: {fileID: 1727940351}
   - component: {fileID: 1727940350}
   - component: {fileID: 1727940349}
+  - component: {fileID: 1727940353}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1504,6 +1506,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1727940353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1727940348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6f3fb146ea72ff42b9b82cea7392092, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1955716826 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1484350937390155632, guid: a81929905c33aa04f9aba52d501bb700, type: 3}

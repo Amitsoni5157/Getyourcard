@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class Card : MonoBehaviour
 {
-    [HideInInspector] public int id;
+    /*[HideInInspector]*/ public int id;
     public Sprite cardBack;
-    [HideInInspector] public Sprite cardFront;
+    /*[HideInInspector]*/ public Sprite cardFront;
 
     private Image image;
     private Button button;
@@ -18,6 +18,8 @@ public class Card : MonoBehaviour
     private float flipAmount = 1;
 
     public float flipSpeed = 4;
+
+    public bool isMatched;
 
 
     // Start is called before the first frame update

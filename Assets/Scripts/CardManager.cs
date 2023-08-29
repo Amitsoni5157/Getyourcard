@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CardManager : Singleton<CardManager>
 {
-   //public GameSaveData gameSaveData;
+  
 
     public List<Sprite> SpriteList = new List<Sprite>();
 
@@ -29,6 +30,9 @@ public class CardManager : Singleton<CardManager>
     public Transform spacer2x3;
     public Transform spacer5x6;
 
+    private Transform currentCardParent;
+    private PairEnum currentGameType;
+
 
     [Header("Basic score per Match")]
     public int matchScore = 10;
@@ -41,17 +45,74 @@ public class CardManager : Singleton<CardManager>
     [Header("Effect")]
     public GameObject fxExplosion;
 
+    GameSaveService gameSaveService = new GameSaveService();
+
 
    
     // Start is called before the first frame update
     void Start()
     {
-        //gameSaveData = PlayerPrefsExtra.GetObject<GameSaveData>("GameSaveData",gameSaveData);
+        switch (Constant._pairEnum)
+        {
+            case PairEnum.Two:
+                currentCardParent = spacer2x2;
+                currentGameType = PairEnum.Two;
+                break;
+            case PairEnum.Three:
+                currentCardParent = spacer2x3;
+                currentGameType = PairEnum.Three;
+                break;
+            case PairEnum.Five:
+                currentCardParent = spacer5x6;
+                currentGameType = PairEnum.Five;
+                break;
+            default:
+                currentCardParent = spacer2x2;
+                currentGameType = PairEnum.Two;
+                break;
+        }
 
-        Pairs = int.Parse(Constant.CheckPairOfGame);
+        CardGameData cardGameData;
+        //gameSaveData = PlayerPrefsExtra.GetObject<GameSaveData>("GameSaveData",gameSaveData);
+        cardGameData = gameSaveService.loadSavedGame(Constant._pairEnum.ToString());
+        if(cardGameData != null)
+        {
+            Pairs = int.Parse(Constant.CheckPairOfGame);
+            LoadSavedCards(cardGameData);
+        }
+        else
+        {
+            Pairs = int.Parse(Constant.CheckPairOfGame);
+
+            Debug.Log(Pairs + "::pairs");
+            FlipPlayFields();
+        }
         
-        Debug.Log(Pairs+"::pairs");
-        FlipPlayFields();
+      //  FlipPlayFields();
+    }
+
+    public void LoadSavedCards(CardGameData cardGameData)
+    {
+        foreach (CardData item in cardGameData._cardData)
+        {
+            GameObject obj = Instantiate(CardPrefab, currentCardParent);
+            Card tempCard = obj.GetComponent<Card>();
+            tempCard.id = item.Id;
+            tempCard.cardFront = SpriteList[item.Id - 1];
+            tempCard.isMatched = item.IsMatched;
+            if (item.IsMatched)
+            {
+                obj.GetComponent<Image>().enabled = false;
+            }
+            else
+            {
+                hiddenButtonList.Add(obj);
+            }
+        }
+        ScoreManager.Instance.currentScore = cardGameData.score;
+        ScoreManager.Instance.currentTurn = cardGameData.turns;
+        ScoreManager.Instance.playTime = cardGameData.time;
+        ScoreManager.Instance.UpdateScoreText();
     }
 
     void FlipPlayFields()
@@ -59,6 +120,8 @@ public class CardManager : Singleton<CardManager>
         switch (Constant._pairEnum)
         {
             case PairEnum.Two:
+                currentCardParent = spacer2x2;
+                currentGameType = PairEnum.Two;
                 for (int i = 0; i < (Pairs * 2); i++)
                 {
                     GameObject newCard = Instantiate(CardPrefab, spacer2x2);
@@ -67,6 +130,8 @@ public class CardManager : Singleton<CardManager>
                 }
                 break;
             case PairEnum.Three:
+                currentCardParent = spacer2x3;
+                currentGameType = PairEnum.Three;
                 for (int i = 0; i < (Pairs * 2); i++)
                 {
                     GameObject newCard = Instantiate(CardPrefab, spacer2x3);
@@ -75,6 +140,8 @@ public class CardManager : Singleton<CardManager>
                 }
                 break;
             case PairEnum.Five:
+                currentCardParent = spacer5x6;
+                currentGameType = PairEnum.Five;
                 for (int i = 0; i < (Pairs * 2); i++)
                 {
                     GameObject newCard = Instantiate(CardPrefab, spacer5x6);
@@ -83,6 +150,8 @@ public class CardManager : Singleton<CardManager>
                 }
                 break;
             default:
+                currentCardParent = spacer2x2;
+                currentGameType = PairEnum.Two;
                 for (int i = 0; i < (Pairs * 2); i++)
                 {
                     GameObject newCard = Instantiate(CardPrefab, spacer2x2);
@@ -146,9 +215,12 @@ public class CardManager : Singleton<CardManager>
             ScoreManager.Instance.AddScore(matchScore);
             //Remove the Match
             RemoveMatch();
+
             //Clear ChoosenCards
             choosenCard.Clear();
         }
+
+        SetisMatched(Choice1,Choice2);
         //Reset All Choises
         Choice1 = 0;
         Choice2 = 0;
@@ -156,6 +228,29 @@ public class CardManager : Singleton<CardManager>
 
         //Check if Won
         StartCoroutine("CheckWin");
+    }
+
+    public void SetisMatched(int choice1,int choice2)
+    {
+        CardGameData cardGameData = new CardGameData();
+        foreach (Transform item in currentCardParent)
+        {
+            Card _card = item.GetComponent<Card>();
+
+            int _id = _card.id;
+            if (choice1 == choice2 && _id == choice2)
+            {
+                _card.isMatched = true;
+            }
+            CardData cardData = new CardData();
+            cardData.Id = _id;
+            cardData.IsMatched = _card.isMatched;
+            cardGameData._cardData.Add(cardData);
+        }
+        cardGameData.score = ScoreManager.Instance.currentScore;
+        cardGameData.turns = ScoreManager.Instance.currentTurn;
+        cardGameData.time = ScoreManager.Instance.playTime;
+        gameSaveService.SaveCurrentGame(cardGameData, currentGameType.ToString());
     }
 
     void FlipAllBack()
@@ -202,26 +297,11 @@ public class CardManager : Singleton<CardManager>
             //Show Stars
             ScoreManager.Instance.ToggleYouWon(true);
             Debug.Log("You Won");
+            gameSaveService.DeleteSaveFile(currentGameType.ToString());
             StopCoroutine("CheckWin");
         }
 
     }
-
-/*    public void SaveGameData()
-    {
-        gameSaveData.Score_temp = ScoreManager.Instance.currentScore;
-        gameSaveData.Time_temp = ScoreManager.Instance.playTime;
-        gameSaveData.Turn_temp = ScoreManager.Instance.CurrentTurn;
-        gameSaveData.hiddenButtonList_temp = hiddenButtonList;
-        gameSaveData.spacer_temp = spacer2x3;
-
-        PlayerPrefsExtra.SetObject("GameSaveData",gameSaveData);
-    }
-
-    public void SaveGame()
-    {
-        SaveGameData();
-    }*/
 
 }
 

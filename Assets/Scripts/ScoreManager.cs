@@ -11,7 +11,7 @@ public class ScoreManager : MonoBehaviour
 
     public int currentScore;
 
-    private int currentTurn;
+    public int currentTurn;
 
     public int playTime;
     private int seconds;
@@ -55,7 +55,7 @@ public class ScoreManager : MonoBehaviour
         UpdateScoreText();
     }
 
-    void UpdateScoreText()
+   public void UpdateScoreText()
     {
         ScoreText.text = "Score: " + currentScore.ToString("N");
         TurnText.text = "Turn: " + CurrentTurn;
